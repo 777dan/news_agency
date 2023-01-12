@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == "/guestBook-22/" || $_SERVER['REQUEST_URI'] == "/guestBook-22/index.php") {
+if ($_SERVER['REQUEST_URI'] == "/news_agency/" || $_SERVER['REQUEST_URI'] == "/news_agency/index.php") {
     header("Location: index.php?page=0");
 }
 
