@@ -1,6 +1,9 @@
 <?php
-if (!str_contains($_SERVER['REQUEST_URI'], "page")) {
+if (!str_contains($_SERVER['REQUEST_URI'], "page") && !str_contains($_SERVER['REQUEST_URI'], "desired")) {
     header("Location: index.php?page=0");
+}
+if (str_contains($_SERVER['REQUEST_URI'], "desired") && !str_contains($_SERVER['REQUEST_URI'], "page")) {
+    header("Location: index.php?page=0&desired=" . $_GET['desired'] . "&search=🔍");
 }
 
 include_once "action.php";
@@ -17,36 +20,30 @@ if (isset($_SESSION['user_login'])) {
 }
 echo "</div>";
 echo "</div>";
-
-
+echo
+"<div class='container d-flex justify-content-center mt-3'>
+    <form action=" . $_SERVER['PHP_SELF'] . " method='get'>
+        <div class='input-group mb-3'>
+            <input type='search' class='form-contol' name='desired' placeholder='Search'>
+            <input type='submit' class='btn btn-info' name='search' value='&#128269;'>
+        </div>
+    </form>
+</div>";
 $page = $_GET['page'];
 $fragmentLen = 5;
-$pagination = pagination($posts = []);
-$numPages = ceil(count($pagination) / $fragmentLen);
-output($pagination, $page, $fragmentLen);
-echo '<div class="container d-flex justify-content-center mt-3">';
-echo "<ul class='pagination'>";
-($page - 1) < 0
-    ?
-    $strElements = [$page, "Prev"]
-    :
-    $strElements = [$page - 1, "Prev"];
-echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . "'>" . $strElements[1] . "</a></li>";
-
-for ($i = 0; $i < $numPages; $i++) {
-    echo "<li class='page-item'><a class='page-link' href='?page=" . $i . "'>" . $i + 1 . "</a></li>";
+if (isset($_GET['search'])) {
+    $searching = search($_GET['desired']);
+    $numPages = ceil(count($searching) / $fragmentLen);
+    $type = "outputSearch";
+    output($searching, $page, $fragmentLen);
+    paginationOutput($page, $numPages, $type);
+} else {
+    $pagination = pagination($posts = []);
+    $numPages = ceil(count($pagination) / $fragmentLen);
+    $type = "outputSimple";
+    output($pagination, $page, $fragmentLen);
+    paginationOutput($page, $numPages, $type);
+    $categoriesList = getCategories();
 }
-
-($page + 1) > ($numPages - 1)
-    ?
-    $strElements = [$page, "Next"]
-    :
-    $strElements = [$page + 1, "Next"];
-
-echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . "'>" . $strElements[1] . "</a></li>";
-echo "</ul>";
-echo "</div>";
-
-$categoriesList = getCategories();
 
 include "footer.php";

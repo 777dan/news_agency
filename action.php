@@ -20,7 +20,7 @@ function check_autorize($log, $pas)
         if (password_verify($pas, $users[$i]['pas']) && $log == $users[$i]['log']) {
             $_SESSION['user_login'] = $log;
             return true;
-        } 
+        }
     }
     if (!$boolValue) return false;
 }
@@ -57,8 +57,7 @@ function registration($log, $pas)
 function add()
 {
     global $conn;
-
-    $username = $_REQUEST['username'];
+    $username = $_SESSION['user_login'];
     $message = $_REQUEST['message'];
     $category = $_REQUEST['categories'];
     $name = $_REQUEST['name'];
@@ -107,6 +106,34 @@ function pagination($posts)
         $i++;
     }
     return $posts;
+}
+
+function paginationOutput($page, $numPages, $type)
+{
+    if ($type == "outputSearch") $strLink = "&desired=" . $_GET['desired'] . "&search=🔍";
+    if ($type == "outputSimple") $strLink = "";
+    echo '<div class="container d-flex justify-content-center mt-3">';
+    echo "<ul class='pagination'>";
+    ($page - 1) < 0
+        ?
+        $strElements = [$page, "Prev"]
+        :
+        $strElements = [$page - 1, "Prev"];
+    echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . $strLink . "'>" . $strElements[1] . "</a></li>";
+
+    for ($i = 0; $i < $numPages; $i++) {
+        echo "<li class='page-item'><a class='page-link' href='?page=" . $i . $strLink . "'>" . $i + 1 . "</a></li>";
+    }
+
+    ($page + 1) > ($numPages - 1)
+        ?
+        $strElements = [$page, "Next"]
+        :
+        $strElements = [$page + 1, "Next"];
+
+    echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . $strLink . "'>" . $strElements[1] . "</a></li>";
+    echo "</ul>";
+    echo "</div>";
 }
 
 function output($pagination, $page, $fragmentLen)
@@ -174,4 +201,18 @@ function backToMainPage()
     echo "<div class='container-fluid d-flex justify-content-center mt-3'>
 <a class='btn btn-info' href='index.php'>Вернуться на главную страницу</a>
 </div>";
+}
+
+function search($desired)
+{
+    global $conn;
+    $i = 0;
+    $sql = "SELECT * FROM `News` WHERE category = '" . $desired . "' or username = '" . $desired . "' or name = '" . $desired . "'";
+    $result = $conn->query($sql);
+    while ($row = $result->fetch_assoc()) {
+        $desired_value[$i] = $row;
+        $i++;
+    }
+    // print_r($desired_value);
+    return $desired_value;
 }

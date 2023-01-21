@@ -34,8 +34,6 @@ if (!$_SESSION['user_login']) {
                 }
                 ?>
             </select>
-            <div>Имя автора:</div>
-            <input name="username" class="form-control" style="width: 300px;">
             <div>Название:</div>
             <input name="name" class="form-control" style="width: 300px;">
             <div>Новость:</div>
@@ -50,7 +48,7 @@ if (!$_SESSION['user_login']) {
 }
 
 if (isset($_SESSION['add']) && $_SESSION['add'] == true) {
-    echo "Запис було додано успішно";
+    echo "<h1 style='text-align:center;color:green;'>Новость была успешно добавлена!<h1>";
     $_SESSION['add'] = false;
 }
 

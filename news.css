@@ -83,3 +83,6 @@
 .news-block:hover>.news_field>.main_text {
     color: #fbffff;
 }
+.news-block:hover>.bottom_border_line>.main_text {
+    color: #22f1ee;
+}
