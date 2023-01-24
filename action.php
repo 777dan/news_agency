@@ -206,6 +206,7 @@ function backToMainPage()
 function search($desired)
 {
     global $conn;
+    $desired_value = [];
     $i = 0;
     $sql = "SELECT * FROM `News` WHERE category = '" . $desired . "' or username = '" . $desired . "' or name = '" . $desired . "'";
     $result = $conn->query($sql);
