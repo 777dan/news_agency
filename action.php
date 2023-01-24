@@ -208,7 +208,7 @@ function search($desired)
     global $conn;
     $desired_value = [];
     $i = 0;
-    $sql = "SELECT * FROM `News` WHERE category = '" . $desired . "' or username = '" . $desired . "' or name = '" . $desired . "'";
+    $sql = "SELECT * FROM `News` WHERE category = '" . $desired . "' or username = '" . $desired . "' or name = '" . $desired . "' or message = '" . $desired . "'";
     $result = $conn->query($sql);
     while ($row = $result->fetch_assoc()) {
         $desired_value[$i] = $row;
