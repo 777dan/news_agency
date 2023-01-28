@@ -140,9 +140,7 @@ function output($pagination, $page, $fragmentLen)
 {
     echo '<div class="container d-flex justify-content-center justify mt-3">';
     echo "<div class='row'>";
-    // $func = pagination($posts);
     if (count($pagination) > 0) {
-        // foreach ($func as $row) {
         $counter = 0;
         for ($i = $page * $fragmentLen; $i < ($page + 1) * $fragmentLen; $i++) {
             if (isset($pagination[$i])) {
