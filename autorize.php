@@ -12,14 +12,12 @@ $str_form = "<div class='container-fluid d-flex justify-content-center mt-4'>
 </div>";
 if (!isset($_POST['go'])) {
     include "header.php";
-    backToMainPage();
     echo $str_form;
 } else {
     if (check_autorize($_POST['login'], $_POST['pas'])) {
             header("Location: index.php");
     } else {
         include "header.php";
-        backToMainPage();
         echo $str_form; // распечатываем форму
         echo "<h3 style='color:red;text-align:center;'>Нет такого пользователя</h3>";
     }

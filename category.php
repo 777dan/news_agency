@@ -1,7 +1,6 @@
 <?php
 include "action.php";
 include "header.php";
-backToMainPage();
 $category_name = $_GET['category'];
 $findSameCategories = findSameCategories($sameCategories = [], $category_name);
 $page = $_GET['page'];

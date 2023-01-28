@@ -1,16 +1,15 @@
 <?php
 include_once "dbconnect.php";
+// include "action.php";
 ob_start();
 session_start();
 if (!$_SESSION['user_login']) {
     Header("Location: index.php");
     ob_end_flush();
 } else {
-
+    include "action.php";
     include "header.php";
     ob_end_flush();
-    include "action.php";
-    backToMainPage();
 ?>
     <div class="container-fluid d-flex justify-content-center mt-3">
         <h3>Добавить новость</h3>
@@ -52,5 +51,4 @@ if (isset($_SESSION['add']) && $_SESSION['add'] == true) {
     $_SESSION['add'] = false;
 }
 
-// $categoriesList = getCategories();
 include "footer.php";

@@ -10,18 +10,15 @@ $str_form = "<div class='container-fluid d-flex justify-content-center mt-3'>
 			 </div>";
 if (!isset($_POST['go'])) {
 	include "header.php";
-	backToMainPage();
 	echo $str_form;
 } else {
 	if (!check_log($_POST['login'])) {
 		if (registration($_POST['login'], password_hash($_POST['pas'], PASSWORD_DEFAULT))) {
 			include "header.php";
-			backToMainPage();
 			echo "<h1 style='color:#198754;text-align:center;'>Поздравляем! Вы успешно зарегистрировались!</h1><br/>";
 		}
 	} else {
 		include "header.php";
-		backToMainPage();
 		echo $str_form;
 		echo "Такой пользователь уже существует";
 	}

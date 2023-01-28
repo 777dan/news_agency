@@ -122,7 +122,7 @@ function paginationOutput($page, $numPages, $type)
     echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . $strLink . "'>" . $strElements[1] . "</a></li>";
 
     for ($i = 0; $i < $numPages; $i++) {
-        echo "<li class='page-item'><a class='page-link' href='?page=" . $i . $strLink . "'>" . $i + 1 . "</a></li>";
+        echo "<li class='page-item'><a class='page-link pag-link' id='pag" . $i . "' href='?page=" . $i . $strLink . "'>" . $i + 1 . "</a></li>";
     }
 
     ($page + 1) > ($numPages - 1)
@@ -138,7 +138,7 @@ function paginationOutput($page, $numPages, $type)
 
 function output($pagination, $page, $fragmentLen)
 {
-    echo '<div class="container d-flex justify-content-center mt-3">';
+    echo '<div class="container d-flex justify-content-center justify mt-3">';
     echo "<div class='row'>";
     // $func = pagination($posts);
     if (count($pagination) > 0) {
@@ -148,7 +148,7 @@ function output($pagination, $page, $fragmentLen)
             if (isset($pagination[$i])) {
                 $counter++;
 ?>
-                <div class="col news-block">
+                <div class="news-block">
                     <div class="bottom_border_line"><span class="news_text">Опубликовал:</span> <span class="writer"><?php echo $pagination[$i]['username']; ?></span></div>
                     <div class="bottom_border_line"><span class="news_text">Категория:</span> <a class="category_link" href="category.php?category=<?= $pagination[$i]['category'] ?>&page=0"><?php echo $pagination[$i]['category']; ?></a></div>
                     <div class="bottom_border_line"><span class="main_text"><?php echo $pagination[$i]['name']; ?></span></div>
@@ -195,14 +195,6 @@ function findSameCategories($sameCategories, $name)
     }
     return $sameCategories;
 }
-
-function backToMainPage()
-{
-    echo "<div class='container-fluid d-flex justify-content-center mt-3'>
-<a class='btn btn-info' href='index.php'>Вернуться на главную страницу</a>
-</div>";
-}
-
 function search($desired)
 {
     global $conn;
