@@ -193,7 +193,7 @@ function search($desired)
     global $conn;
     $desired_value = [];
     $i = 0;
-    $sql = "SELECT * FROM `News` WHERE category = '" . $desired . "' or username = '" . $desired . "' or name = '" . $desired . "' or message = '" . $desired . "'";
+    $sql = "SELECT * FROM `News` WHERE category LIKE '%" . $desired . "%' or username LIKE '%" . $desired . "%' or name LIKE '%" . $desired . "%' or message LIKE '%" . $desired . "%'";
     $result = $conn->query($sql);
     while ($row = $result->fetch_assoc()) {
         $desired_value[$i] = $row;

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="news.css">
     <link rel="stylesheet" href="loader.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>News</title>
 </head>
 
@@ -35,7 +36,10 @@
     <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container-fluid">
             <a class="nav-link me-5 text-white" href='index.php'>&starf; Новостное агенство</a>
-            <div class="collapse navbar-collapse ms-3" id="mynavbar">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ms-3" id="collapsibleNavbar">
                 <ul class="navbar-nav me-auto">
                     <?php
                     if (isset($_SESSION['user_login'])) {
@@ -68,7 +72,7 @@
     </nav>
     <?php
     if (isset($_GET['category'])) echo "<h1 class='mt-3' style='text-align:center;'>{$_GET['category']}</h1>";
-    
+
     if (str_contains($_SERVER['REQUEST_URI'], "desired") && !str_contains($_SERVER['REQUEST_URI'], "page")) {
         header("Location: index.php?page=0&desired=" . $_GET['desired'] . "&search=🔍");
     }
