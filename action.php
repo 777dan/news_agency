@@ -114,24 +114,19 @@ function paginationOutput($page, $numPages, $type)
     if ($type == "outputSimple") $strLink = "";
     echo '<div class="container d-flex justify-content-center mt-3">';
     echo "<ul class='pagination'>";
-    ($page - 1) < 0
-        ?
-        $strElements = [$page, "Prev"]
-        :
+    if ($page != 0) {
         $strElements = [$page - 1, "Prev"];
-    echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . $strLink . "'>" . $strElements[1] . "</a></li>";
+        echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . $strLink . "'>" . $strElements[1] . "</a></li>";
+    }
 
     for ($i = 0; $i < $numPages; $i++) {
         echo "<li class='page-item'><a class='page-link pag-link' id='pag" . $i . "' href='?page=" . $i . $strLink . "'>" . $i + 1 . "</a></li>";
     }
 
-    ($page + 1) > ($numPages - 1)
-        ?
-        $strElements = [$page, "Next"]
-        :
+    if ($numPages - 1 != $page) {
         $strElements = [$page + 1, "Next"];
-
-    echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . $strLink . "'>" . $strElements[1] . "</a></li>";
+        echo "<li class='page-item'><a class='page-link' href='?page=" . $strElements[0] . $strLink . "'>" . $strElements[1] . "</a></li>";
+    }
     echo "</ul>";
     echo "</div>";
 }
