@@ -34,7 +34,7 @@
     </style>
     <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container-fluid">
-            <h5 class="text-white">&starf; Новостное агенство</h5>
+            <a class="nav-link me-5 text-white" href='index.php'>&starf; Новостное агенство</a>
             <div class="collapse navbar-collapse ms-3" id="mynavbar">
                 <ul class="navbar-nav me-auto">
                     <?php
@@ -46,7 +46,7 @@
                         echo "<a class='nav-link' href='registration.php'>Зарегистрироваться</a>";
                     }
                     ?>
-                    <a class='nav-link me-5' href='index.php'>На главную</a>
+                    <!-- <a class='nav-link me-5' href='index.php'>На главную</a> -->
                     <?php
                     foreach (getCategories() as $key => $value) {
                         foreach ($value as $category => $category_name) {
@@ -66,3 +66,10 @@
             </div>
         </div>
     </nav>
+    <?php
+    if (isset($_GET['category'])) echo "<h1 class='mt-3' style='text-align:center;'>{$_GET['category']}</h1>";
+    
+    if (str_contains($_SERVER['REQUEST_URI'], "desired") && !str_contains($_SERVER['REQUEST_URI'], "page")) {
+        header("Location: index.php?page=0&desired=" . $_GET['desired'] . "&search=🔍");
+    }
+    ?>

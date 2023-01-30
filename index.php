@@ -2,9 +2,6 @@
 if (!str_contains($_SERVER['REQUEST_URI'], "page") && !str_contains($_SERVER['REQUEST_URI'], "desired")) {
     header("Location: index.php?page=0");
 }
-if (str_contains($_SERVER['REQUEST_URI'], "desired") && !str_contains($_SERVER['REQUEST_URI'], "page")) {
-    header("Location: index.php?page=0&desired=" . $_GET['desired'] . "&search=🔍");
-}
 
 include_once "action.php";
 include "header.php";

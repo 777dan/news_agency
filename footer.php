@@ -4,8 +4,12 @@
                 0 500, 50 L500, 400 L0, 300 Z" style="stroke:none; fill:darkcyan; width:100%;height:500px;">
     </path>
 </svg><br>
-<div class="container d-flex justify-content-center mt-3">
-    <h3 style="position:fixed;text-align:center;">2023</h3>
+<div class="container mt-3">
+    <?php
+    if (isset($_GET['category'])) echo "<h3 style='text-align:center;'>{$_GET['category']}</h3>";
+    ?>
+    <h3 style="text-align:center;">&#169; Никитин Данил</h3><br>
+    <h3 style="text-align:center;">2023</h3>
 </div>
 </body>
 
