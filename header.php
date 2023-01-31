@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +66,7 @@
                 </ul>
                 <form class="d-flex">
                     <input type='search' class='form-control me-2' name='desired' placeholder='Поиск'>
-                    <input type='submit' class='btn btn-info' name='search' value='&#128269;'><br>
+                    <input type='submit' class='btn btn-info' name='search' value='&#128269;'>
                 </form>
             </div>
         </div>
@@ -75,5 +76,6 @@
 
     if (str_contains($_SERVER['REQUEST_URI'], "desired") && !str_contains($_SERVER['REQUEST_URI'], "page")) {
         header("Location: index.php?page=0&desired=" . $_GET['desired'] . "&search=🔍");
+        ob_end_flush();
     }
     ?>

@@ -133,7 +133,7 @@ function paginationOutput($page, $numPages, $type)
 
 function output($pagination, $page, $fragmentLen)
 {
-    echo '<div class="container d-flex justify-content-center justify mt-3">';
+    echo '<div class="container justify-content-center mt-3">';
     echo "<div class='row'>";
     if (count($pagination) > 0) {
         $counter = 0;
@@ -141,7 +141,7 @@ function output($pagination, $page, $fragmentLen)
             if (isset($pagination[$i])) {
                 $counter++;
 ?>
-                <div class="news-block">
+                <div class="container my-5 news-block">
                     <div class="bottom_border_line"><span class="news_text">Опубликовал:</span> <span class="writer"><?php echo $pagination[$i]['username']; ?></span></div>
                     <div class="bottom_border_line"><span class="news_text">Категория:</span> <a class="category_link" href="category.php?category=<?= $pagination[$i]['category'] ?>&page=0"><?php echo $pagination[$i]['category']; ?></a></div>
                     <div class="bottom_border_line"><span class="main_text"><?php echo $pagination[$i]['name']; ?></span></div>
